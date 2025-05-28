@@ -4,6 +4,7 @@ import { CreateProjectDto } from './dto/create-project.dto';
 import { UpdateProjectDto } from './dto/update-project.dto';
 import { AuthGuard } from 'src/common/guards/auth.guard';
 import { Permissions } from 'src/common/decorators/permissions.decorator';
+import { Public } from 'src/common/decorators/public.decorator';
 
 @Controller('projects')
 @UseGuards(AuthGuard)
@@ -17,7 +18,7 @@ export class ProjectsController {
   }
 
   @Get()
-  @Permissions('permission-project-view')
+  @Public()
   async findAll() {
     return await this.projectsService.findAll();
   }

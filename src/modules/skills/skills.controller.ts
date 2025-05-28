@@ -4,6 +4,7 @@ import { CreateSkillDto } from './dto/create-skill.dto';
 import { UpdateSkillDto } from './dto/update-skill.dto';
 import { AuthGuard } from 'src/common/guards/auth.guard';
 import { Permissions } from 'src/common/decorators/permissions.decorator';
+import { Public } from 'src/common/decorators/public.decorator';
 
 @Controller('skills')
 @UseGuards(AuthGuard)
@@ -17,7 +18,7 @@ export class SkillsController {
   }
 
   @Get()
-  @Permissions('permission-skill-view')
+  @Public()
   async findAll() {
     return await this.skillsService.findAll();
   }

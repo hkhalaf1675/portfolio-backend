@@ -5,6 +5,7 @@ import { UpdatePersonalInfoDto } from './dto/update-personal-info.dto';
 import { IPersonalInfoQuery } from './interfaces/personal-info-query.interface';
 import { AuthGuard } from 'src/common/guards/auth.guard';
 import { Permissions } from 'src/common/decorators/permissions.decorator';
+import { Public } from 'src/common/decorators/public.decorator';
 
 @Controller('personal-info')
 @UseGuards(AuthGuard)
@@ -18,7 +19,7 @@ export class PersonalInfoController {
   }
 
   @Get()
-  @Permissions('permission-personal-info-view')
+  @Public()
   async findAll(@Query() query: IPersonalInfoQuery) {
     return await this.personalInfoService.findAll(query);
   }

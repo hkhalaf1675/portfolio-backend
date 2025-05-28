@@ -4,6 +4,7 @@ import { CreateCertificationDto } from './dto/create-certification.dto';
 import { UpdateCertificationDto } from './dto/update-certification.dto';
 import { AuthGuard } from 'src/common/guards/auth.guard';
 import { Permissions } from 'src/common/decorators/permissions.decorator';
+import { Public } from 'src/common/decorators/public.decorator';
 
 @Controller('certifications')
 @UseGuards(AuthGuard)
@@ -17,7 +18,7 @@ export class CertificationsController {
   }
 
   @Get()
-  @Permissions('permission-certification-view')
+  @Public()
   async findAll() {
     return await this.certificationsService.findAll();
   }

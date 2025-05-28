@@ -4,6 +4,7 @@ import { CreateExperienceDto } from './dto/create-experience.dto';
 import { UpdateExperienceDto } from './dto/update-experience.dto';
 import { AuthGuard } from 'src/common/guards/auth.guard';
 import { Permissions } from 'src/common/decorators/permissions.decorator';
+import { Public } from 'src/common/decorators/public.decorator';
 
 @Controller('experiences')
 @UseGuards(AuthGuard)
@@ -17,7 +18,7 @@ export class ExperiencesController {
   }
 
   @Get()
-  @Permissions('permission-experience-view')
+  @Public()
   async findAll() {
     return await this.experiencesService.findAll();
   }

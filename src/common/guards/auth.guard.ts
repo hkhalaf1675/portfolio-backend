@@ -7,6 +7,7 @@ import dataSource from 'src/database/data-source';
 import { User } from 'src/modules/users/entities/user.entity';
 import { Reflector } from '@nestjs/core';
 import { PERMISSIONS_KEY } from '../decorators/permissions.decorator';
+import { IS_PUBLIC_KEY } from '../decorators/public.decorator';
 
 @Injectable()
 export class AuthGuard implements CanActivate {
@@ -18,6 +19,15 @@ export class AuthGuard implements CanActivate {
   async canActivate(
     context: ExecutionContext,
   ) {
+    const isPublic = this.reflector.getAllAndOverride<boolean>(IS_PUBLIC_KEY, [
+      context.getHandler(),
+      context.getClass()
+    ]);
+
+    if(isPublic){
+      return true;
+    }
+
     const request = context.switchToHttp().getRequest();
     const token = this.extractTokenFromHeader(request);
 
