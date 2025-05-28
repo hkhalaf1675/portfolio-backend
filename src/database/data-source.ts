@@ -11,7 +11,10 @@ export const dataSourceOptions: DataSourceOptions = {
     database: process.env.DB_DATABASE,
     entities: [process.env.DB_ENTITIES_PATH],
     migrations: [process.env.DB_MIGRATIONS_PATH],
-    synchronize: false
+    synchronize: false,
+    ssl: {
+        rejectUnauthorized: true
+    }
 }
 
 const dataSource = new DataSource(dataSourceOptions);
