@@ -29,7 +29,7 @@ export class ExperiencesService {
   async findAll() {
     const experiences = await this.experienceRepository.find({
       order: {
-        createdAt: 'DESC',
+        id: 'ASC',
       },
     });
 
